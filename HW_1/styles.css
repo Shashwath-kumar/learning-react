@@ -68,6 +68,7 @@ input:focus{
     white-space: nowrap;
     position: relative;
     right: 3%;
+    top:0.5rem;
 }
 .agreement p {
     margin: 0;

@@ -66,6 +66,8 @@ input:focus{
     display: flex;
     align-items: center;
     white-space: nowrap;
+    position: relative;
+    right: 3%;
 }
 .agreement p {
     margin: 0;

@@ -1,0 +1,80 @@
+1. Why are closures useful in JavaScript? Give an example use case.
+
+    Closures are useful in JavaScript because they allow a function to access variables from an enclosing scope even after that scope has finished executing. This is particularly useful for data encapsulation and creating functions with persistent private variables.
+
+    Example:
+
+    Creating a counter (similar to the one in training):
+
+    function createCounter() {
+    let count = 0;
+    return function() {
+        count += 1;
+        return count;
+    }
+    }
+
+    const counter = createCounter();
+    console.log(counter()); // 1
+    console.log(counter()); // 2
+    console.log(counter()); // 3
+
+    Here the count variable acts as a private variable.
+
+2. When should you choose to use “let” or “const”
+
+    let: Use 'let' when you need a block-scoped variable that can be reassigned. It's useful for loop counters, conditionally reassigned values, or any variable that needs to change value within its scope.
+
+    let count = 0;
+    if (true) {
+    let count = 1; // This `count` is different from the outer `count`
+    }
+    console.log(count); // 0
+
+
+    const: Use 'const' when you need a block-scoped variable that should not be reassigned. It's ideal for constants, or variables that should not change once assigned.
+
+    const MAX_USERS = 100;
+    const user = { name: "Alice" };
+    user.name = "Bob"; // This is allowed
+    // user = { name: "Charlie" }; // This would cause an error
+
+3. Give an example of a common mistake related to hoisting and explain how to fix it.
+
+    Common Mistake:
+
+    Using variables before they are declared.
+
+    console.log(myVar); // Output: undefined
+    var myVar = 5;
+
+    In this example, myVar is hoisted to the top of its scope, but its assignment is not. This can lead to undefined being logged instead of throwing a ReferenceError.
+
+    Fix:
+
+    Declare and initialize variables before using them.
+
+    var myVar = 5;
+    console.log(myVar); // Output: 5
+
+4. What will the outcome of each console.log() be after the function calls? Why?
+
+    Output:
+    [ 1, 2, 3 ]
+    [ 1, 2, 3 ]
+    [ 1, 2, 3, 3 ]
+    [ 1, 2, 3, 3 ]
+
+    Explanation:
+
+    1. After foo1(arr) and console.log(arr);
+    foo1 pushes 3 to the array arg, which is a reference to arr. Therefore, arr becomes [1, 2, 3].
+
+    2. After foo2(arr) and console.log(arr);
+    foo2 assigns a new array [1, 2, 3, 4] to arg, but this does not affect arr because arg is a local variable within foo2. Therefore, arr remains [1, 2, 3].
+
+    3. After foo3(arr) and console.log(arr);
+    foo3 creates a new variable b that references arg (which is arr). It then pushes 3 to b, affecting arr. Therefore, arr becomes [1, 2, 3, 3].
+
+    4. After foo4(arr) and console.log(arr);
+    foo4 creates a new variable b that references arg (which is arr). It then assigns a new array [1, 2, 3, 4] to b, but this does not affect arr because b is a local variable within foo4. Therefore, arr remains [1, 2, 3, 3].
